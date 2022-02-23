@@ -1,18 +1,18 @@
-baseurl: https://example.com
+baseurl: https://whuwangyong.github.io/
 languageCode: en-us
 theme: hugo-theme-stack
 paginate: 5
-title: Example Site
+title: 武大路飞的博客
 
 # Change it to your Disqus shortname before using
-disqusShortname: hugo-theme-stack
+disqusShortname: whuwangoyng
 
 # GA Tracking ID
 googleAnalytics:
 
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk
-DefaultContentLanguage: en
+DefaultContentLanguage: zh-cn
 
 # Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
 # This will make .Summary and .WordCount behave correctly for CJK languages.
@@ -38,12 +38,12 @@ params:
         lastUpdated: Jan 02, 2006 15:04 MST
 
     sidebar:
-        emoji: 🍥
-        subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        #emoji: 🍥
+        subtitle: Javaer
         avatar:
             enabled: true
             local: true
-            src: img/avatar.png
+            src: img/avatar.jpg
 
     article:
         math: false
@@ -55,7 +55,7 @@ params:
 
     comments:
         enabled: true
-        provider: disqus
+        provider: utterances
 
         disqusjs:
             shortname:
@@ -65,9 +65,9 @@ params:
             adminLabel:
 
         utterances:
-            repo:
+            repo: whuwangyong/whuwangyong.github.io
             issueTerm: pathname
-            label:
+            label: blog-comments
 
         remark42:
             host:
@@ -133,7 +133,7 @@ params:
             id:
     widgets:
         enabled:
-            - search
+            # - search
             - archives
             - tag-cloud
 
@@ -141,7 +141,7 @@ params:
             limit: 5
 
         tagCloud:
-            limit: 10
+            limit: 20
 
     opengraph:
         twitter:
@@ -175,27 +175,49 @@ params:
 ### To remove about, archive and search page menu item, remove `menu` field from their FrontMatter
 menu:
     main:
-        - identifier: home
-          name: Home
-          url: /
-          weight: -100
+        # - identifier: home
+        #   name: Home
+        #   url: /
+        #   weight: -100
+        #   params:
+        #       ### For demonstration purpose, the home link will be open in a new tab
+        #       newTab: true
+        #       icon: home
+
+        - identifier: categories
+          name: Categories
+          url: /categories
+          weight: 200
+          params:
+              icon: list-details
+
+        - identifier: tags
+          name: Tags
+          url: /tags
+          weight: 100
           params:
               ### For demonstration purpose, the home link will be open in a new tab
-              newTab: true
-              icon: home
+            #   newTab: true
+              icon: tag
 
     social:
         - identifier: github
           name: GitHub
-          url: https://github.com/CaiJimmy/hugo-theme-stack
+          url: https://github.com/whuwangyong
           params:
               icon: brand-github
 
-        - identifier: twitter
-          name: Twitter
-          url: https://twitter.com
+        # - identifier: twitter
+        #   name: Twitter
+        #   url: https://twitter.com
+        #   params:
+        #       icon: brand-twitter
+              
+        - identifier: mail
+          name: Mail
+          url: mailto:whuwangyong@qq.com
           params:
-              icon: brand-twitter
+              icon: mail-forward
 
 related:
     includeNewer: true
