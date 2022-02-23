@@ -15,6 +15,7 @@ tags:
 子模块是一个单独的项目，`commit push`等操作需要在子模块自己的repo目录下操作。父项目的操作与子模块无关。父项目`git add`无法添加子模块的`changes`，当然也就无法`commit push`。
 
 子模块版本升级后，父项目不会自动升级，仍然停留在对之前版本的引用。以下命令可以查看父模块当前使用子模块的哪个版本：
+<!--more-->
 
 ```bash
 > git submodule status
