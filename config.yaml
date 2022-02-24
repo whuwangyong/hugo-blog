@@ -165,11 +165,14 @@ params:
         # Available values: auto, light, dark
         default: dark
 
+    # add by whuwangyong on 2022/02/25
+    # if set true, will create extra two images. search "Page.Site.Params.imageProcessing" for details
+    # default is true
     imageProcessing:
         cover:
             enabled: true
         content:
-            enabled: true
+            enabled: false
 
 ### Custom menu
 ### See https://docs.stack.jimmycai.com/configuration/custom-menu.html
