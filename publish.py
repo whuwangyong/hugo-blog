@@ -2,14 +2,16 @@
 # -*- coding: UTF-8 -*-
 
 """
-this script use to:
-1. delete old files(resources, public) built by hugo
-2. run hugo to generate new files
-3. delete old files in github.io
-4. mv files from hugo/public/ to github.io/
+这个脚本执行以下操作：
+1. 删除hugo上次渲染的文件(resources, public)
+2. 修改md，将图片从相对路径替换为在线url
+3. 运行hugo，渲染md为html
+4. 删除github.io里面的全部文件
+5. 将hugo/public/下的所有文件移动到 github.io/
 """
 
 import os
+import re
 import shutil
 import sys
 import time
@@ -29,8 +31,46 @@ def delete_last_hugo_files(hugo_dir):
 
 
 # 处理post目录下的md文档，将相对路径的图片替换为在线url。这样做的目的是，便于md文档复制到其他平台进行发表
-def raplece_img_url(hugo_dir):
-    postdir = hugo_dir + os.sep + "content" + os.sep + "post"
+def replace_img_url(hugo_dir):
+    print("++")
+    print("++ replace_img_url...")
+    post_dir = hugo_dir + os.sep + "content" + os.sep + "post"
+    prefix = 'https://cdn.jsdelivr.net/gh/whuwangyong/whuwangyong.github.io/p/'
+
+    for root, dirs, files in os.walk(post_dir):
+        # root 表示当前正在访问的文件夹路径
+        # dirs 表示该文件夹下的子目录名list
+        # files 表示该文件夹下的文件list
+
+        if str(root).find('图片加载网速测试') != -1:
+            continue
+
+        # 遍历文件
+        for f in files:
+            if str(f).endswith('.md'):
+                mdf = os.path.join(root, f)
+                with open(mdf, 'r+', encoding='utf-8') as md:
+                    content = md.read()
+                    # 查找md图片语法
+                    img_list = re.findall(r'!\[.*?\]\(.*?\)', content)
+                    for i in img_list:
+                        if str(i).find('https') != -1:
+                            img_list.remove(i)
+
+                    if len(img_list) > 0:
+                        # processing:  E:\blog\hugo-blog-stack\content\post\效率工具\vpn\V2Ray搭建指南\index.md
+                        print('processing: ', mdf)
+
+                        # 获取渲染为html之后文章的所在路径：md上级目录的小写
+                        uplevel = str(mdf).split(os.sep)[-2].lower()
+
+                        for img in img_list:
+                            new_img = str(img).replace('](', '](' + prefix + uplevel + '/')
+                            print("\treplacing " + img + " to " + new_img)
+                            content = content.replace(img, new_img)
+                    # 将指针移到文件头，然后写入替换后的内容
+                    md.seek(0)
+                    md.write(content)
 
 
 # 开始渲染md为html
@@ -70,7 +110,7 @@ def move_new_files_to_site(hugo_dir, githubio_dir):
         shutil.move(f_path, githubio_dir)
 
 
-if __name__ == "__main__":
+def main():
     print("+++++++++++++++++++")
     print("++ publish start...")
     print("++ current dir is:", os.getcwd())
@@ -79,17 +119,23 @@ if __name__ == "__main__":
 
     delete_last_hugo_files(hugo_dir)
 
+    replace_img_url(hugo_dir)
+
     start_hugo()
 
     # parent dir
     pardir = os.path.join(hugo_dir, os.pardir)
-    githubio_dir = os.path.join(pardir, GITHUB_IO_SITE)
+    github_io_dir = os.path.join(pardir, GITHUB_IO_SITE)
 
     # delete older files
-    del_files_in_site(githubio_dir)
+    del_files_in_site(github_io_dir)
 
-    move_new_files_to_site(hugo_dir, githubio_dir)
+    move_new_files_to_site(hugo_dir, github_io_dir)
 
     print("+++++++++++++++++++")
     print("done!")
     print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+
+
+if __name__ == "__main__":
+    main()

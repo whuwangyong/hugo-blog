@@ -229,7 +229,7 @@ Linux 命令生成：`cat /proc/sys/kernel/random/uuid`
 
 官方的这个图真的太皮了，特意拿过来：
 
-![image.png](assets/image-20220308230038-enct8t4.png)
+![image.png](https://cdn.jsdelivr.net/gh/whuwangyong/whuwangyong.github.io/p/v2ray搭建指南/assets/image-20220308230038-enct8t4.png)
 
 
 ## 运行
