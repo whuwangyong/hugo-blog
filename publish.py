@@ -101,13 +101,21 @@ def del_files_in_site(site_dir):
 
 
 # 将刚渲染出来的html复制到目标站点
-def move_new_files_to_site(hugo_dir, githubio_dir):
+def move_new_files_to_site(hugo_dir, github_io_dir):
     print("++")
     print("++ move files from hugo/public/ to github.io/")
     for f_name in os.listdir(hugo_dir + os.sep + 'public'):
         f_path = hugo_dir + os.sep + "public" + os.sep + f_name
         print("++ move:", f_name)
-        shutil.move(f_path, githubio_dir)
+        shutil.move(f_path, github_io_dir)
+
+
+# 自动提交github.io
+def commit(github_io_dir):
+    os.chdir(github_io_dir)
+    os.system("git add .")
+    os.system("git commit -m 'update'")
+    os.system("git push")
 
 
 def main():
@@ -135,6 +143,8 @@ def main():
     print("+++++++++++++++++++")
     print("done!")
     print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+
+    commit(github_io_dir)
 
 
 if __name__ == "__main__":
