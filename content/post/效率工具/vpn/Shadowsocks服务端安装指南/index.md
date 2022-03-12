@@ -1,3 +1,13 @@
+---
+title: "shadowsocks服务端安装指南"
+date: 2022-03-12
+draft: false
+categories:
+    - 效率工具
+tags:
+    - shadowsocks
+---
+
 > 官方地址：
 >
 > [shadowsocks/shadowsocks-libev: Bug-fix-only libev port of shadowsocks. Future development moved to shadowsocks-rust (github.com)](https://github.com/shadowsocks/shadowsocks-libev)
