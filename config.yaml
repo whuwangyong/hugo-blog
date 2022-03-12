@@ -163,7 +163,7 @@ params:
         toggle: true
 
         # Available values: auto, light, dark
-        default: dark
+        default: light
 
     # add by whuwangyong on 2022/02/25
     # if set true, will create extra two images. search "Page.Site.Params.imageProcessing" for details
