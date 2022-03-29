@@ -53,7 +53,7 @@ def replace_img_url(hugo_dir):
                     content = md.read()
                     # 查找md图片语法
                     img_list = re.findall(r'!\[.*?\]\(.*?\)', content)
-                    for i in img_list:
+                    for i in img_list[::-1]:
                         if str(i).find('https') != -1:
                             img_list.remove(i)
 
