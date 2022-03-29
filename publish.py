@@ -90,6 +90,9 @@ def del_files_in_site(site_dir):
     for f_name in os.listdir(site_dir):
         f_path = site_dir + os.sep + f_name
         if os.path.isfile(f_path):
+            if f_name == "googled04f27d52767f531.html":
+                print("++ reserve googled04f27d52767f531.html")
+                continue
             os.remove(f_path)
             print("++ remove file:", f_path)
         elif f_name == ".git":
@@ -144,7 +147,7 @@ def main():
     print("done!")
     print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
-    commit(github_io_dir)
+    # commit(github_io_dir)
 
 
 if __name__ == "__main__":
